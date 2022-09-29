@@ -1,0 +1,50 @@
+<html>
+<!--- Copyright 2022 Meiling Mathur <violinmeiling@gmail.com> --->
+<head>
+<link rel="stylesheet" href="styles.css">
+<script src = "source.js">
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<script>
+        function generatePDF() {
+                // Choose the element that our invoice is rendered in.
+                const element = document.getElementById('toPrint');
+                // Choose the element and save the PDF for our user.
+                var opt = {
+  margin:       1,
+  filename:     'inventory_report.pdf',
+  image:        { type: 'jpeg', quality: 0.98 },
+  html2canvas:  { scale: 2 },
+  jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
+};
+                html2pdf().set(opt).from(element).save();
+        }
+</script>
+<title>Inventory tracker</title>
+</head>
+<body>
+<h1>Inventory Tracker</h1>
+<p>Please paste the SKUs from your price list into the box below</p>
+<p>Make sure each SKU is on a new line</p>
+<textarea rows = "5" cols = "60" id="pricelist" name="pricelist"></textarea>
+<br>
+<button type="button" onclick="checkProducts()" id="checkbutton">Check products</button>
+<div id = "toPrint">
+<div id="header">
+</div>
+<div id="toDeleteTitle">
+</div>
+<div id="toDelete">
+</div>
+<div id="toAddTitle">
+</div>
+<div id="toAdd">
+</div>
+</div>
+<button type="button" onclick="generatePDF()" id="generatepdf">Generate PDF</button>
+<br>
+<a href="info.html">Learn more</a>
+</body>
+</html>
